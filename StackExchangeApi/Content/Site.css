@@ -1,0 +1,54 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#main {
+    font-size: 15px;
+    font-family:Arial;
+}
+
+.Title {
+    font-size: 22px;
+    background: #D9EDF7;
+    padding:5px 0 5px 5px;
+}
+
+.Name {
+    font-weight: bold;
+    background: #D9EDF7;
+    padding: 5px 0 5px 5px;
+}
+
+.Link {
+    background: #F5F5F5;
+    padding: 5px 0 5px 5px;
+    text-decoration: underline;
+    color: cornflowerblue;
+}
+
+.Date {
+    background: #F5F5F5;
+    padding: 5px 0 5px 5px;
+    color: gray;
+    font-weight: bold;
+}
+.Tags {
+    background: #F5F5F5;
+    padding: 5px 0 5px 5px;
+
+}
+

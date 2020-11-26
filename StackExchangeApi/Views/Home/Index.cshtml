@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Stack API";
+}
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h2>Stack Over Flow Questions</h2>
+        </div>
+        <button class="btn btn-info">Refresh</button>
+        <br /> <br />
+        <div id="main">
+
+        </div>
+    </div>
+</body>
+
+
+<script>
+    //Create Html Tags
+    function CreateDiv(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div;
+    }
+    //parent Element
+    var el = document.getElementById('main');
+    //Date Formating 
+    function DateConverter(Date) {
+        var year = Date.getFullYear() + 50;
+   
+        var month = Date.getMonth() + 11;
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = Date.getDate()+7;
+        if (date < 10) {
+            date = "0" + date;
+        }
+
+        var formattedDate = year + "/" + month + "/" + date;
+        return formattedDate;
+    }
+
+    //Creating redirect link
+    function CreateLink(text) {
+        var a = document.createElement('a');    
+        var link = document.createTextNode("Go to Topic");
+        a.appendChild(link);
+        a.title = "This is Link";
+        a.href = text;  
+        a.target = "_blank";
+        return a;
+    }
+
+
+    //Data Fetch
+    function FetchData() {
+                    $.get("https://api.stackexchange.com/2.2/questions?page=1&pagesize=50&order=desc&sort=creation&site=stackoverflow", function (response) {
+                        for (var i = 0; i < response.items.length; i++) {
+                        
+
+                            var title = CreateDiv("Title: " + response.items[i].title);
+                            title.classList.add("Title");
+                            el.appendChild(title);
+
+                            var name = CreateDiv("Owner: " + response.items[i].owner.display_name);
+                            name.classList.add("Name");
+                            el.appendChild(name);
+
+                            var tags = CreateDiv("Tags: " + response.items[i].tags);
+                            tags.classList.add("Tags");
+                            el.appendChild(tags);
+                            
+                            var DateMS = new Date(response.items[i].creation_date);
+                            var FormatedDate = DateConverter(DateMS);
+                            var date = CreateDiv("Date: " + FormatedDate);
+                            date.classList.add("Date");
+                            el.appendChild(date);
+
+                            var link = CreateLink(response.items[i].link);
+                            link.classList.add("btn","btn-success");
+                            el.appendChild(link);
+
+                            var br = document.createElement('br');
+                            el.appendChild(br);
+
+                        }
+            });
+    }
+
+    $(document).ready(function () {
+        //Call DataFetch Function
+        FetchData();
+
+        $("button").click(function () {
+          //FetchData();
+            location.reload();
+        });
+    });
+</script>
